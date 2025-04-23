@@ -79,6 +79,20 @@ const xxxx = () => {
     side.remove();
   });
 
+  // icon-link
+  document.querySelectorAll('.icon-link').forEach((side) => {
+    side.remove();
+  });
+  document.querySelectorAll('img').forEach((side) => {
+    side.remove();
+  });
+
+  //ALink_none_1w6rm tag_boxAlink_24N89
+  document.querySelectorAll('[class*="ALink_none_"][class*="tag_boxAlink_"]').forEach((side) => {
+    side.remove();
+  });
+
+
   // class="woo-icon-wrap woo-icon-opacity IconVip_icon_2tjdp"
   document.querySelectorAll('[class*="woo-icon-wrap"][class*="woo-icon-opacity"][class*="IconVip_icon_"]').forEach((side) => {
     side.remove();
@@ -97,6 +111,10 @@ export default defineContentScript({
       }
       
       a{
+      color: #000 !important;
+      }
+
+      .expand{
       color: #000 !important;
       }
        
