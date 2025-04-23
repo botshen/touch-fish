@@ -17,14 +17,18 @@ const xxxx = () => {
   document.querySelectorAll(`[class^="Frame_top_"]`).forEach((frame) => {
     frame.remove();
   });
+
   // 删除以SecBar_secBar_开头的class
   document.querySelectorAll(`[class^="SecBar_secBar_"]`).forEach((secBar) => {
     secBar.remove();
   });
+
   // 删除以SecBar_visable_开头的class
   document.querySelectorAll(`[class^="SecBar_visable_"]`).forEach((visable) => {
     visable.remove();
   });
+
+
   // class="Frame_side_3G0Bf grayTheme" 删除这个div
   document.querySelectorAll(`[class^="Frame_side_"]`).forEach((side) => {
     side.remove();
@@ -34,10 +38,12 @@ const xxxx = () => {
   document.querySelectorAll(`[class^="Main_side_"]`).forEach((side) => {
     side.remove();
   });
+
   // class="picture picture-box_row_30Iwo"
   document.querySelectorAll('.picture[class*="picture-box_row_"]').forEach((side) => {
     side.remove();
   });
+
   // card-video_videoBox_
   document.querySelectorAll(`[class^="card-video_videoBox_"]`).forEach((side) => {
     side.remove();
@@ -58,6 +64,7 @@ const xxxx = () => {
       (frameWrapElement as HTMLElement).classList.add('xxxxxx');
     }
   }
+
   // woo-avatar-main woo-avatar-hover head_avatar_20c9y
   document.querySelectorAll('.woo-avatar-main.woo-avatar-hover[class*="head_avatar_"]').forEach((side) => {
     side.remove();
@@ -73,11 +80,12 @@ const xxxx = () => {
       (side as HTMLElement).style.paddingLeft = '0';
     });
   }
-
   // footer
   document.querySelectorAll('footer').forEach((side) => {
     side.remove();
   });
+  // return;
+
 
   // icon-link
   document.querySelectorAll('.icon-link').forEach((side) => {
@@ -103,21 +111,303 @@ export default defineContentScript({
   matches: ['*://*.weibo.com/*'],
   cssInjectionMode: 'ui',
   async main(ctx) {
+    // 创建 Word 风格的顶部栏
+    const wordTopBar = document.createElement('div');
+    wordTopBar.className = 'word-top-bar';
+    wordTopBar.innerHTML = `
+      <div class="word-header">
+        <div class="word-title">
+          <div class="word-icon">W</div>
+          <div class="doc-title">文档1 - Word</div>
+          <div class="window-controls">
+            <span class="window-btn minimize">─</span>
+            <span class="window-btn maximize">□</span>
+            <span class="window-btn close">×</span>
+          </div>
+        </div>
+        <div class="quick-access">
+          <span class="quick-btn save">💾</span>
+          <span class="quick-btn undo">↩</span>
+          <span class="quick-btn redo">↪</span>
+        </div>
+      </div>
+      <div class="word-ribbon">
+        <div class="ribbon-tabs">
+          <span class="ribbon-tab active">开始</span>
+          <span class="ribbon-tab">插入</span>
+          <span class="ribbon-tab">绘图</span>
+          <span class="ribbon-tab">设计</span>
+          <span class="ribbon-tab">布局</span>
+          <span class="ribbon-tab">引用</span>
+          <span class="ribbon-tab">邮件</span>
+          <span class="ribbon-tab">审阅</span>
+          <span class="ribbon-tab">视图</span>
+          <span class="ribbon-tab">帮助</span>
+        </div>
+        <div class="ribbon-content">
+          <div class="ribbon-group">
+            <div class="ribbon-tools">
+              <span class="tool-btn paste">
+                <span class="icon">📋</span>
+                <span class="label">粘贴</span>
+              </span>
+            </div>
+            <div class="group-label">剪贴板</div>
+          </div>
+          <div class="ribbon-group">
+            <div class="ribbon-tools font-tools">
+              <div class="font-select">
+                <span>微软雅黑</span>
+                <span class="size">11</span>
+              </div>
+              <div class="font-btns">
+                <span class="tool-btn">B</span>
+                <span class="tool-btn">I</span>
+                <span class="tool-btn">U</span>
+              </div>
+            </div>
+            <div class="group-label">字体</div>
+          </div>
+        </div>
+      </div>
+    `;
+    document.body.insertBefore(wordTopBar, document.body.firstChild);
+
+    // 创建 Word 风格的底部栏
+    const wordBottomBar = document.createElement('div');
+    wordBottomBar.className = 'word-bottom-bar';
+    wordBottomBar.innerHTML = `
+      <div class="status-items">
+        <span>页数: 1</span>
+        <span>字数: 0</span>
+        <span>中文(简体)</span>
+        <span>100%</span>
+      </div>
+    `;
+    document.body.appendChild(wordBottomBar);
+
     // 创建 style 元素
     const style = document.createElement('style');
     style.textContent = `
-      .xxxxxx {
-        background-color: #e8e8e8 !important;
-      }
-      
-      a{
-      color: #000 !important;
+      .word-top-bar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 158px;
+         z-index: 9999;
+        display: flex;
+        flex-direction: column;
+        border-bottom: 1px solid #e6e6e6;
+        font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif;
       }
 
-      .expand{
-      color: #000 !important;
+      .word-header {
+        height: 32px;
+        background: #217346;
+        display: flex;
+        align-items: center;
+        padding: 0 4px;
+        color: white;
       }
-       
+
+      .word-title {
+        display: flex;
+        align-items: center;
+        flex: 1;
+        font-size: 12px;
+      }
+
+      .word-icon {
+        width: 16px;
+        height: 16px;
+        background: white;
+        color: #217346;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 6px;
+        font-weight: bold;
+        border-radius: 2px;
+      }
+
+      .window-controls {
+        display: flex;
+        margin-left: auto;
+      }
+
+      .window-btn {
+        width: 45px;
+        height: 32px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+      }
+
+      .window-btn:hover {
+        background: rgba(255,255,255,0.1);
+      }
+
+      .quick-access {
+        display: flex;
+        gap: 8px;
+        padding: 0 10px;
+        border-left: 1px solid rgba(255,255,255,0.2);
+        margin-left: 10px;
+      }
+
+      .quick-btn {
+        padding: 4px;
+        cursor: pointer;
+        opacity: 0.9;
+      }
+
+      .quick-btn:hover {
+        opacity: 1;
+        background: rgba(255,255,255,0.1);
+      }
+
+      .word-ribbon {
+        background: #f3f2f1;
+      }
+
+      .ribbon-tabs {
+        height: 32px;
+        display: flex;
+        align-items: center;
+        padding: 0 4px;
+        gap: 1px;
+        background: #f3f2f1;
+      }
+
+      .ribbon-tab {
+        padding: 0 12px;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        font-size: 13px;
+        color: #444;
+        cursor: pointer;
+        position: relative;
+      }
+
+      .ribbon-tab:hover {
+        background: #e6e6e6;
+      }
+
+      .ribbon-tab.active {
+        background: white;
+        color: #217346;
+      }
+
+      .ribbon-content {
+        height: 94px;
+        background: white;
+        border-bottom: 1px solid #e6e6e6;
+        display: flex;
+        padding: 4px;
+      }
+
+      .ribbon-group {
+        padding: 0 2px;
+        border-right: 1px solid #e6e6e6;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        min-width: 50px;
+      }
+
+      .group-label {
+        font-size: 11px;
+        color: #666;
+        margin-top: auto;
+        padding: 2px 0;
+      }
+
+      .ribbon-tools {
+        display: flex;
+        gap: 2px;
+        padding: 4px;
+      }
+
+      .tool-btn {
+        padding: 4px 8px;
+        font-size: 12px;
+        color: #444;
+        cursor: pointer;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 2px;
+      }
+
+      .tool-btn:hover {
+        background: #e3e3e3;
+        border-radius: 3px;
+      }
+
+      .font-tools {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+      }
+
+      .font-select {
+        display: flex;
+        gap: 8px;
+        font-size: 12px;
+        color: #444;
+      }
+
+      .font-btns {
+        display: flex;
+        gap: 2px;
+      }
+
+      body {
+        margin-top: 158px;
+        margin-bottom: 25px;
+        background: #fff;
+      }
+
+      .word-bottom-bar {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 25px;
+        background: #f3f2f1;
+        border-top: 1px solid #e6e6e6;
+        z-index: 9999;
+        display: flex;
+        align-items: center;
+        padding: 0 20px;
+        font-size: 12px;
+        color: #666;
+      }
+
+      .status-items {
+        display: flex;
+        gap: 20px;
+      }
+
+      .xxxxxx {
+        background-color: #fff !important;
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 40px;
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        min-height: calc(100vh - 155px);
+      }
+      
+      a {
+        color: #000 !important;
+      }
+
+      .expand {
+        color: #000 !important;
+      }
     `;
 
     // 将 style 元素添加到文档头部
