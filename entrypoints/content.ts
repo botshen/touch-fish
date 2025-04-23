@@ -1,69 +1,77 @@
 import './style.css';
 
 const xxxx = () => {
-  // 删除所有的<video>标签
+  // 添加隐藏元素的 CSS 类
+  const style = document.createElement('style');
+  style.textContent = `
+    .touch-fish-hidden {
+      display: none !important;
+    }
+  `;
+  document.head.appendChild(style);
+
+  // 隐藏所有的<video>标签
   document.querySelectorAll('video').forEach((video) => {
-    video.remove();
+    video.classList.add('touch-fish-hidden');
   });
-  // 删除所有的<svg>标签
+  // 隐藏所有的<svg>标签
   document.querySelectorAll('svg').forEach((svg) => {
-    svg.remove();
+    svg.classList.add('touch-fish-hidden');
   });
-  // 删除所有的<img>标签
+  // 隐藏所有的<img>标签
   document.querySelectorAll('picture').forEach((img) => {
-    img.remove();
+    img.classList.add('touch-fish-hidden');
   });
-  // 删除以Frame_top_2ybWw开头的class
+  // 隐藏以Frame_top_2ybWw开头的class
   document.querySelectorAll(`[class^="Frame_top_"]`).forEach((frame) => {
-    frame.remove();
+    frame.classList.add('touch-fish-hidden');
   });
 
-  // 删除以SecBar_secBar_开头的class
+  // 隐藏以SecBar_secBar_开头的class
   document.querySelectorAll(`[class^="SecBar_secBar_"]`).forEach((secBar) => {
-    secBar.remove();
+    secBar.classList.add('touch-fish-hidden');
   });
 
-  // 删除以SecBar_visable_开头的class
+  // 隐藏以SecBar_visable_开头的class
   document.querySelectorAll(`[class^="SecBar_visable_"]`).forEach((visable) => {
-    visable.remove();
+    visable.classList.add('touch-fish-hidden');
   });
 
-
-  // class="Frame_side_3G0Bf grayTheme" 删除这个div
+  // class="Frame_side_3G0Bf grayTheme" 隐藏这个div
   document.querySelectorAll(`[class^="Frame_side_"]`).forEach((side) => {
-    side.remove();
+    side.classList.add('touch-fish-hidden');
   });
-
 
   // Main_side_
   document.querySelectorAll(`[class^="Main_side_"]`).forEach((side) => {
-    side.remove();
+    side.classList.add('touch-fish-hidden');
   });
   // class="picture picture-box_row_30Iwo"
   document.querySelectorAll('.picture[class*="picture-box_row_"]').forEach((side) => {
-    side.remove();
+    side.classList.add('touch-fish-hidden');
   });
 
   // card-video_videoBox_
   document.querySelectorAll(`[class^="card-video_videoBox_"]`).forEach((side) => {
-    side.remove();
+    side.classList.add('touch-fish-hidden');
   });
   // woo-picture-main
   document.querySelectorAll('.woo-picture-main').forEach((side) => {
-    side.remove();
+    side.classList.add('touch-fish-hidden');
   });
   // woo-button-main
   document.querySelectorAll('.woo-button-main').forEach((side) => {
-    side.remove();
+    side.classList.add('touch-fish-hidden');
   });
   // woo-avatar-main woo-avatar-hover head_avatar_20c9y
   document.querySelectorAll('.woo-avatar-main.woo-avatar-hover[class*="head_avatar_"]').forEach((side) => {
-    side.remove();
+    side.classList.add('touch-fish-hidden');
   });
   // class="woo-icon-wrap woo-icon-opacity IconVip_icon_2tjdp"
   document.querySelectorAll('[class*="woo-icon-wrap"][class*="woo-icon-opacity"][class*="IconVip_icon_"]').forEach((side) => {
-    side.remove();
+    side.classList.add('touch-fish-hidden');
   });
+
   // wbpro-feed-content
   const contentElement = document.querySelectorAll('.wbpro-feed-content');
   if (contentElement) {
@@ -73,13 +81,12 @@ const xxxx = () => {
   }
   // icon-link
   document.querySelectorAll('.icon-link').forEach((side) => {
-    side.remove();
+    side.classList.add('touch-fish-hidden');
   });
   // class="card-vote_wrap_15NVR card-vote_original_2JeMZ content_row_-r5Tk"
   document.querySelectorAll('[class*="card-vote_wrap_"][class*="card-vote_original_"][class*="content_row_"]').forEach((side) => {
-    side.remove();
+    side.classList.add('touch-fish-hidden');
   });
-  return;
 
   // Frame_wrap_  
   const appElement = document.querySelector('#app');
@@ -90,27 +97,19 @@ const xxxx = () => {
     }
   }
 
-
-
   // footer
-  document.querySelectorAll('footer').forEach((side) => {
-    side.remove();
-  });
-
-
-
+  // document.querySelectorAll('footer').forEach((side) => {
+  //   side.classList.add('touch-fish-hidden');
+  // });
 
   document.querySelectorAll('img').forEach((side) => {
-    side.remove();
+    side.classList.add('touch-fish-hidden');
   });
 
   //ALink_none_1w6rm tag_boxAlink_24N89
   document.querySelectorAll('[class*="ALink_none_"][class*="tag_boxAlink_"]').forEach((side) => {
-    side.remove();
+    side.classList.add('touch-fish-hidden');
   });
-
-
-
 }
 
 export default defineContentScript({
@@ -179,18 +178,7 @@ export default defineContentScript({
     `;
     document.body.insertBefore(wordTopBar, document.body.firstChild);
 
-    // 创建 Word 风格的底部栏
-    const wordBottomBar = document.createElement('div');
-    wordBottomBar.className = 'word-bottom-bar';
-    wordBottomBar.innerHTML = `
-      <div class="status-items">
-        <span>页数: 1</span>
-        <span>字数: 0</span>
-        <span>中文(简体)</span>
-        <span>100%</span>
-      </div>
-    `;
-    document.body.appendChild(wordBottomBar);
+
 
     // 创建 style 元素
     const style = document.createElement('style');
