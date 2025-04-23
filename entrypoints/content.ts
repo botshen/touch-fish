@@ -34,11 +34,11 @@ const xxxx = () => {
     side.remove();
   });
 
+
   // Main_side_
   document.querySelectorAll(`[class^="Main_side_"]`).forEach((side) => {
     side.remove();
   });
-
   // class="picture picture-box_row_30Iwo"
   document.querySelectorAll('.picture[class*="picture-box_row_"]').forEach((side) => {
     side.remove();
@@ -56,21 +56,12 @@ const xxxx = () => {
   document.querySelectorAll('.woo-button-main').forEach((side) => {
     side.remove();
   });
-  // Frame_wrap_  背景红色
-  const appElement = document.querySelector('#app');
-  if (appElement) {
-    const frameWrapElement = appElement.querySelector('[class*="Frame_wrap"]');
-    if (frameWrapElement) {
-      (frameWrapElement as HTMLElement).classList.add('xxxxxx');
-    }
-  }
-
   // woo-avatar-main woo-avatar-hover head_avatar_20c9y
   document.querySelectorAll('.woo-avatar-main.woo-avatar-hover[class*="head_avatar_"]').forEach((side) => {
     side.remove();
   });
-  // class="card-vote_wrap_15NVR card-vote_original_2JeMZ content_row_-r5Tk"
-  document.querySelectorAll('[class*="card-vote_wrap_"][class*="card-vote_original_"][class*="content_row_"]').forEach((side) => {
+  // class="woo-icon-wrap woo-icon-opacity IconVip_icon_2tjdp"
+  document.querySelectorAll('[class*="woo-icon-wrap"][class*="woo-icon-opacity"][class*="IconVip_icon_"]').forEach((side) => {
     side.remove();
   });
   // wbpro-feed-content
@@ -80,17 +71,35 @@ const xxxx = () => {
       (side as HTMLElement).style.paddingLeft = '0';
     });
   }
-  // footer
-  document.querySelectorAll('footer').forEach((side) => {
-    side.remove();
-  });
-  // return;
-
-
   // icon-link
   document.querySelectorAll('.icon-link').forEach((side) => {
     side.remove();
   });
+  // class="card-vote_wrap_15NVR card-vote_original_2JeMZ content_row_-r5Tk"
+  document.querySelectorAll('[class*="card-vote_wrap_"][class*="card-vote_original_"][class*="content_row_"]').forEach((side) => {
+    side.remove();
+  });
+  return;
+
+  // Frame_wrap_  
+  const appElement = document.querySelector('#app');
+  if (appElement) {
+    const frameWrapElement = appElement.querySelector('[class*="Frame_wrap"]');
+    if (frameWrapElement) {
+      (frameWrapElement as HTMLElement).classList.add('xxxxxx');
+    }
+  }
+
+
+
+  // footer
+  document.querySelectorAll('footer').forEach((side) => {
+    side.remove();
+  });
+
+
+
+
   document.querySelectorAll('img').forEach((side) => {
     side.remove();
   });
@@ -101,10 +110,7 @@ const xxxx = () => {
   });
 
 
-  // class="woo-icon-wrap woo-icon-opacity IconVip_icon_2tjdp"
-  document.querySelectorAll('[class*="woo-icon-wrap"][class*="woo-icon-opacity"][class*="IconVip_icon_"]').forEach((side) => {
-    side.remove();
-  });
+
 }
 
 export default defineContentScript({
