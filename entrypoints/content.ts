@@ -58,6 +58,20 @@ export default defineContentScript({
   cssInjectionMode: 'ui',
   async main(ctx) {
     console.log('222', 222)
+    // 创建 MutationObserver 实例
+    const observer = new MutationObserver((mutations) => {
+      xxxx();
+    });
+
+    // 配置 observer
+    const config = {
+      childList: true,  // 监听子节点的增删
+      subtree: true     // 监听所有后代节点
+    };
+
+    // 开始观察 document.body
+    observer.observe(document.body, config);
+
     // 3. Define your UI
     const ui = await createShadowRootUi(ctx, {
       name: 'example-ui',
