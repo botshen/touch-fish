@@ -9,19 +9,22 @@ const xxxx = () => {
     }
   `;
   document.head.appendChild(style);
-
   // 隐藏所有的<video>标签
   document.querySelectorAll('video').forEach((video) => {
     video.classList.add('touch-fish-hidden');
   });
+
+
+
   // 隐藏所有的<svg>标签
-  document.querySelectorAll('svg').forEach((svg) => {
-    svg.classList.add('touch-fish-hidden');
-  });
+  // document.querySelectorAll('svg').forEach((svg) => {
+  //   svg.classList.add('touch-fish-hidden');
+  // });
   // 隐藏所有的<img>标签
   document.querySelectorAll('picture').forEach((img) => {
     img.classList.add('touch-fish-hidden');
   });
+
   // 隐藏以Frame_top_2ybWw开头的class
   document.querySelectorAll(`[class^="Frame_top_"]`).forEach((frame) => {
     frame.classList.add('touch-fish-hidden');
@@ -31,7 +34,6 @@ const xxxx = () => {
   document.querySelectorAll(`[class^="SecBar_secBar_"]`).forEach((secBar) => {
     secBar.classList.add('touch-fish-hidden');
   });
-
   // 隐藏以SecBar_visable_开头的class
   document.querySelectorAll(`[class^="SecBar_visable_"]`).forEach((visable) => {
     visable.classList.add('touch-fish-hidden');
@@ -41,7 +43,6 @@ const xxxx = () => {
   document.querySelectorAll(`[class^="Frame_side_"]`).forEach((side) => {
     side.classList.add('touch-fish-hidden');
   });
-
   // Main_side_
   document.querySelectorAll(`[class^="Main_side_"]`).forEach((side) => {
     side.classList.add('touch-fish-hidden');
